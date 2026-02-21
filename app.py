@@ -1,15 +1,19 @@
-import os
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def inicio():
-    return "Bienvenido a EcoSmart Energy – Sistema de monitoreo de consumo eléctrico"
+    return render_template('index.html')
 
-@app.route('/usuario/<nombre>')
-def usuario(nombre):
-    return f"Bienvenido {nombre}, a EcoSmart Energy. Consulta tu consumo aquí."
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/productos')
+def productos():
+    lista_productos = ["Laptop", "Mouse", "Teclado"]
+    return render_template('productos.html', productos=lista_productos)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 10000)))
+    app.run(debug=True)
